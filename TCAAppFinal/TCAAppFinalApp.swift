@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+//import Overture
+import FavoritePrimeFramework
+import ComposableArch
 
 @main
 struct TCAAppFinalApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: Store(
+                initialValue: AppState(),
+                reducer: logging(_appReducer)
+            )
+            )
+            .preferredColorScheme(.light)
         }
     }
 }

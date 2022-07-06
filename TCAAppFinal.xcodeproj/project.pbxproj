@@ -11,6 +11,10 @@
 		6B1E930B2874B76E002BD276 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1E930A2874B76E002BD276 /* ContentView.swift */; };
 		6B1E930D2874B770002BD276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B1E930C2874B770002BD276 /* Assets.xcassets */; };
 		6B1E93102874B770002BD276 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B1E930F2874B770002BD276 /* Preview Assets.xcassets */; };
+		6B1E931B2874C252002BD276 /* FavoritePrimeFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 6B1E931A2874C252002BD276 /* FavoritePrimeFramework */; };
+		6B563BE72875D3900060C265 /* CounterFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 6B563BE62875D3900060C265 /* CounterFramework */; };
+		6B8327E02874DDBA007A83E8 /* PrimeModalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 6B8327DF2874DDBA007A83E8 /* PrimeModalFramework */; };
+		6BDD9DCE2875E3170066E03B /* ComposableArch in Frameworks */ = {isa = PBXBuildFile; productRef = 6BDD9DCD2875E3170066E03B /* ComposableArch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,9 @@
 		6B1E930A2874B76E002BD276 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6B1E930C2874B770002BD276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B1E930F2874B770002BD276 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6B1E931D2874C2BC002BD276 /* FavoritePrimeFramework */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FavoritePrimeFramework; path = ../FavoritePrimeFramework; sourceTree = "<group>"; };
+		6B563BE42875D3600060C265 /* CounterFramework */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CounterFramework; path = ../CounterFramework; sourceTree = "<group>"; };
+		6B8327E12874DDCF007A83E8 /* PrimeModalFramework */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PrimeModalFramework; path = ../PrimeModalFramework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +33,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B1E931B2874C252002BD276 /* FavoritePrimeFramework in Frameworks */,
+				6B563BE72875D3900060C265 /* CounterFramework in Frameworks */,
+				6B8327E02874DDBA007A83E8 /* PrimeModalFramework in Frameworks */,
+				6BDD9DCE2875E3170066E03B /* ComposableArch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,6 +46,7 @@
 		6B1E92FC2874B76E002BD276 = {
 			isa = PBXGroup;
 			children = (
+				6B1E931C2874C2BC002BD276 /* Packages */,
 				6B1E93072874B76E002BD276 /* TCAAppFinal */,
 				6B1E93062874B76E002BD276 /* Products */,
 			);
@@ -67,6 +79,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		6B1E931C2874C2BC002BD276 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				6B1E931D2874C2BC002BD276 /* FavoritePrimeFramework */,
+				6B8327E12874DDCF007A83E8 /* PrimeModalFramework */,
+				6B563BE42875D3600060C265 /* CounterFramework */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,6 +105,12 @@
 			dependencies = (
 			);
 			name = TCAAppFinal;
+			packageProductDependencies = (
+				6B1E931A2874C252002BD276 /* FavoritePrimeFramework */,
+				6B8327DF2874DDBA007A83E8 /* PrimeModalFramework */,
+				6B563BE62875D3900060C265 /* CounterFramework */,
+				6BDD9DCD2875E3170066E03B /* ComposableArch */,
+			);
 			productName = TCAAppFinal;
 			productReference = 6B1E93052874B76E002BD276 /* TCAAppFinal.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +139,12 @@
 				Base,
 			);
 			mainGroup = 6B1E92FC2874B76E002BD276;
+			packageReferences = (
+				6B1E93192874C252002BD276 /* XCRemoteSwiftPackageReference "FavoritePrimeFramework" */,
+				6B8327DE2874DDBA007A83E8 /* XCRemoteSwiftPackageReference "PrimeModalFramework" */,
+				6B563BE52875D3900060C265 /* XCRemoteSwiftPackageReference "CounterFramework" */,
+				6BDD9DCC2875E3170066E03B /* XCRemoteSwiftPackageReference "ComposableArch-" */,
+			);
 			productRefGroup = 6B1E93062874B76E002BD276 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -339,6 +373,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6B1E93192874C252002BD276 /* XCRemoteSwiftPackageReference "FavoritePrimeFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MatthewGarlington/FavoritePrimeFramework.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		6B563BE52875D3900060C265 /* XCRemoteSwiftPackageReference "CounterFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MatthewGarlington/CounterFramework.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		6B8327DE2874DDBA007A83E8 /* XCRemoteSwiftPackageReference "PrimeModalFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MatthewGarlington/PrimeModalFramework.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		6BDD9DCC2875E3170066E03B /* XCRemoteSwiftPackageReference "ComposableArch-" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MatthewGarlington/ComposableArch-.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6B1E931A2874C252002BD276 /* FavoritePrimeFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B1E93192874C252002BD276 /* XCRemoteSwiftPackageReference "FavoritePrimeFramework" */;
+			productName = FavoritePrimeFramework;
+		};
+		6B563BE62875D3900060C265 /* CounterFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B563BE52875D3900060C265 /* XCRemoteSwiftPackageReference "CounterFramework" */;
+			productName = CounterFramework;
+		};
+		6B8327DF2874DDBA007A83E8 /* PrimeModalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B8327DE2874DDBA007A83E8 /* XCRemoteSwiftPackageReference "PrimeModalFramework" */;
+			productName = PrimeModalFramework;
+		};
+		6BDD9DCD2875E3170066E03B /* ComposableArch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6BDD9DCC2875E3170066E03B /* XCRemoteSwiftPackageReference "ComposableArch-" */;
+			productName = ComposableArch;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6B1E92FD2874B76E002BD276 /* Project object */;
 }

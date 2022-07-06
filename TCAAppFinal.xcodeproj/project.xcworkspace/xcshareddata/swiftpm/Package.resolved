@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "composablearch-",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MatthewGarlington/ComposableArch-.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8b90d11d6315b5877bc5e2d2ff0d488b3bca879b"
+      }
+    }
+  ],
+  "version" : 2
+}
