@@ -16,7 +16,7 @@ struct TCAAppFinalApp: App {
         WindowGroup {
             ContentView(store: Store(
                 initialValue: AppState(),
-                reducer: logging(_appReducer)
+                reducer: logging(appReducer)
             )
             )
             .preferredColorScheme(.light)

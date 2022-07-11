@@ -14,7 +14,6 @@
 		6B1E931B2874C252002BD276 /* FavoritePrimeFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 6B1E931A2874C252002BD276 /* FavoritePrimeFramework */; };
 		6B563BE72875D3900060C265 /* CounterFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 6B563BE62875D3900060C265 /* CounterFramework */; };
 		6B8327E02874DDBA007A83E8 /* PrimeModalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 6B8327DF2874DDBA007A83E8 /* PrimeModalFramework */; };
-		6BDD9DCE2875E3170066E03B /* ComposableArch in Frameworks */ = {isa = PBXBuildFile; productRef = 6BDD9DCD2875E3170066E03B /* ComposableArch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 				6B1E931B2874C252002BD276 /* FavoritePrimeFramework in Frameworks */,
 				6B563BE72875D3900060C265 /* CounterFramework in Frameworks */,
 				6B8327E02874DDBA007A83E8 /* PrimeModalFramework in Frameworks */,
-				6BDD9DCE2875E3170066E03B /* ComposableArch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,7 +107,6 @@
 				6B1E931A2874C252002BD276 /* FavoritePrimeFramework */,
 				6B8327DF2874DDBA007A83E8 /* PrimeModalFramework */,
 				6B563BE62875D3900060C265 /* CounterFramework */,
-				6BDD9DCD2875E3170066E03B /* ComposableArch */,
 			);
 			productName = TCAAppFinal;
 			productReference = 6B1E93052874B76E002BD276 /* TCAAppFinal.app */;
@@ -143,7 +140,6 @@
 				6B1E93192874C252002BD276 /* XCRemoteSwiftPackageReference "FavoritePrimeFramework" */,
 				6B8327DE2874DDBA007A83E8 /* XCRemoteSwiftPackageReference "PrimeModalFramework" */,
 				6B563BE52875D3900060C265 /* XCRemoteSwiftPackageReference "CounterFramework" */,
-				6BDD9DCC2875E3170066E03B /* XCRemoteSwiftPackageReference "ComposableArch-" */,
 			);
 			productRefGroup = 6B1E93062874B76E002BD276 /* Products */;
 			projectDirPath = "";
@@ -399,14 +395,6 @@
 				kind = branch;
 			};
 		};
-		6BDD9DCC2875E3170066E03B /* XCRemoteSwiftPackageReference "ComposableArch-" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MatthewGarlington/ComposableArch-.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -424,11 +412,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6B8327DE2874DDBA007A83E8 /* XCRemoteSwiftPackageReference "PrimeModalFramework" */;
 			productName = PrimeModalFramework;
-		};
-		6BDD9DCD2875E3170066E03B /* ComposableArch */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6BDD9DCC2875E3170066E03B /* XCRemoteSwiftPackageReference "ComposableArch-" */;
-			productName = ComposableArch;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

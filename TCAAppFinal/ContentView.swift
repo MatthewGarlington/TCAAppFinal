@@ -17,26 +17,19 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink { CounterView(store: store.view(
-                    value: { ($0.count, $0.favorites) },
-                    action: {
-                        switch $0 {
-                        case let .counter(action):
-                            return .counter(action)
-                        case let .primeModal(action):
-                            return .primeModal(action)
-                        }
-                    })
-                )
-
-                } label: {
-                    Text("Counter demo")
+                NavigationLink(destination: CounterView(
+                    store: self.store.view(
+                        value:  { $0.counterView },
+                        action:  { .counterView($0) }))
+                    
+                ) {
+                    Text("Counter Demo")
                 }
                 
                 NavigationLink { FavoritePrimeView(
                     store: store.view(
-                        value: { $0.favorites },
-                        action: { .favoritesList($0) })
+                        value: { $0.favoritePrimes },
+                        action: { .favoritePrimes($0) })
                 )
                 } label: {
                     Text("Favorites primes")
@@ -49,120 +42,100 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(store: .init(initialValue: AppState(), reducer: _appReducer))
+        ContentView(store: .init(initialValue: AppState(), reducer: appReducer))
     }
 }
 
 struct AppState {
-     var count = 0
-     var favorites: [Int] = []
-     var loggedInUser: User? = nil
-     var activityFeed: [Activity] = []
-    
-    struct Activity {
-        let timeStap: Date
-        let type: ActivityType
-        
-        enum ActivityType {
-            case addedFavoritesPrime(Int)
-            case removedFavoritesPrime(Int)
-        }
+  var count = 0
+  var favoritePrimes: [Int] = []
+  var loggedInUser: User? = nil
+  var activityFeed: [Activity] = []
+
+  struct Activity {
+    let timestamp: Date
+    let type: ActivityType
+
+    enum ActivityType {
+      case addedFavoritePrime(Int)
+      case removedFavoritePrime(Int)
     }
-    
-    struct User {
-        var id: Int
-        var name: String
-        var bio: String
-    }
+  }
+
+  struct User {
+    let id: Int
+    let name: String
+    let bio: String
+  }
 }
 
 enum AppAction {
-    case counter(CounterAction)
-    case primeModal(PrimeModalAction)
-    case favoritesList(FavoritesPrimeActions)
-    
-    var counter: CounterAction? {
-        get {
-            guard case let .counter(value) = self else { return nil }
-            return value
-        }
+  case counterView(CounterViewAction)
+  case favoritePrimes(FavoritesPrimeActions)
 
-        set {
-            guard case .counter = self, let newValue = newValue else { return }
-            self = .counter(newValue)
-        }
+  var favoritePrimes: FavoritesPrimeActions? {
+    get {
+      guard case let .favoritePrimes(value) = self else { return nil }
+      return value
     }
-    
-    var primeModel: PrimeModalAction? {
-        get {
-            guard case let .primeModal(value) = self else { return nil }
-            return value
-        }
-
-        set {
-            guard case .primeModal = self, let newValue = newValue else { return }
-            self = .primeModal(newValue)
-        }
+    set {
+      guard case .favoritePrimes = self, let newValue = newValue else { return }
+      self = .favoritePrimes(newValue)
     }
+  }
 
-    var favoritePrimes: FavoritesPrimeActions? {
-        get {
-            guard case let .favoritesList(value) = self else { return nil }
-            return value
-        }
-        set {
-            guard case .favoritesList = self, let newValue = newValue else { return }
-            self = .favoritesList(newValue)
-        }
+  var counterView: CounterViewAction? {
+    get {
+      guard case let .counterView(value) = self else { return nil }
+      return value
     }
-}
-
-
-func activityFeed(
-    _ reducer: @escaping (inout AppState, AppAction) -> Void
-) -> (inout AppState, AppAction) -> Void {
-    return { state, action in
-        switch action {
-        case .counter:
-            break
-        case .primeModal(.removeFavoritePrimeTapped):
-            state.activityFeed.append(.init(timeStap: Date(), type: .removedFavoritesPrime(state.count)))
-            
-        case .primeModal(.saveFavoritePrimeTapped):
-            state.activityFeed.append(.init(timeStap: Date(), type: .addedFavoritesPrime(state.count)))
-            
-        case let .favoritesList(.deleteFavoritePrimes(indexSet)):
-            for index in indexSet {
-                state.activityFeed.append(.init(timeStap: Date(), type: .removedFavoritesPrime(index)))
-            }
-        }
-        reducer(&state, action)
+    set {
+      guard case .counterView = self, let newValue = newValue else { return }
+      self = .counterView(newValue)
     }
+  }
 }
 
 extension AppState {
-    var primeModal: PrimeModalState {
-        get {
-            PrimeModalState(
-                count: self.count,
-                favorites: self.favorites
-            )
-        }
-        set {
-            self.count = newValue.count
-            self.favorites = newValue.favorites
-        }
+  var counterView: CounterViewState {
+    get {
+        CounterViewState(
+        count: self.count,
+        favorites: self.favoritePrimes
+      )
     }
+    set {
+      self.count = newValue.count
+      self.favoritePrimes = newValue.favorites
+    }
+  }
 }
 
-let _appReducer: (inout AppState, AppAction) -> Void = combine(
-    pullback(counterReducer, value: \.count, action: \.counter),
-    pullback(primeModalReducer, value: \.primeModal, action: \.primeModel),
-    pullback(favoriteListReducer, value: \.favorites, action: \.favoritePrimes)
+let appReducer: (inout AppState, AppAction) -> Void = combine(
+    pullback(counterViewReducer, value: \.counterView, action: \.counterView),
+    pullback(favoriteListReducer, value: \.favoritePrimes, action: \.favoritePrimes)
 )
 
-
-//let appReducer = combine(
-//    pullback(_appReducer, value: \.self)
-//)
-
+func activityFeed(
+  _ reducer: @escaping (inout AppState, AppAction) -> Void
+) -> (inout AppState, AppAction) -> Void {
+    
+    return { state, action in
+        switch action {
+        case .counterView(.counter):
+            break
+        case .counterView(.primeModal(.removeFavoritePrimeTapped)):
+            state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(state.count)))
+            
+        case .counterView(.primeModal(.saveFavoritePrimeTapped)):
+            state.activityFeed.append(.init(timestamp: Date(), type: .addedFavoritePrime(state.count)))
+            
+        case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
+            for index in indexSet {
+                state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(state.favoritePrimes[index])))
+            }
+        }
+        
+        reducer(&state, action)
+    }
+}
