@@ -134,6 +134,10 @@ func activityFeed(
             for index in indexSet {
                 state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(state.favoritePrimes[index])))
             }
+        case .favoritePrimes(.loadFavoritePrimes(_)):
+            break
+        case .favoritePrimes(.savedButtonTapped):
+            break
         }
         
         reducer(&state, action)
