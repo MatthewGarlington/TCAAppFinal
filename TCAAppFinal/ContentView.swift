@@ -101,17 +101,19 @@ extension AppState {
     get {
         CounterViewState(
         count: self.count,
-        favorites: self.favoritePrimes
+        favorites: self.favoritePrimes,
+        showAlert: self.counterView.showAlert
       )
     }
     set {
       self.count = newValue.count
       self.favoritePrimes = newValue.favorites
+        self.counterView.showAlert = newValue.showAlert
     }
   }
 }
 
-let appReducer: (inout AppState, AppAction) -> Void = combine(
+let appReducer: (inout AppState, AppAction) -> [Effect<AppAction>] = combine(
     pullback(counterViewReducer, value: \.counterView, action: \.counterView),
     pullback(favoriteListReducer, value: \.favoritePrimes, action: \.favoritePrimes)
 )
@@ -137,6 +139,8 @@ func activityFeed(
         case .favoritePrimes(.loadFavoritePrimes(_)):
             break
         case .favoritePrimes(.savedButtonTapped):
+            break
+        case .favoritePrimes(.loadButtonTapped):
             break
         }
         
