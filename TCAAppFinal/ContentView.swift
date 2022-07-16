@@ -47,10 +47,12 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct AppState {
-  var count = 0
-  var favoritePrimes: [Int] = []
-  var loggedInUser: User? = nil
-  var activityFeed: [Activity] = []
+    var count = 0
+    var favoritePrimes: [Int] = []
+    var loggedInUser: User? = nil
+    var activityFeed: [Activity] = []
+    var showModal: Bool = false
+    var showAlert: Bool = false
 
   struct Activity {
     let timestamp: Date
@@ -100,15 +102,17 @@ extension AppState {
   var counterView: CounterViewState {
     get {
         CounterViewState(
-        count: self.count,
-        favorites: self.favoritePrimes,
-        showAlert: self.counterView.showAlert
-      )
+            count: self.count,
+            favorites: self.favoritePrimes,
+            showAlert: self.showAlert,
+            showModal: self.showModal
+        )
     }
     set {
-      self.count = newValue.count
-      self.favoritePrimes = newValue.favorites
-        self.counterView.showAlert = newValue.showAlert
+        self.count = newValue.count
+        self.favoritePrimes = newValue.favorites
+        self.showAlert = newValue.showAlert
+        self.showModal = newValue.showModal
     }
   }
 }
@@ -119,12 +123,15 @@ let appReducer: (inout AppState, AppAction) -> [Effect<AppAction>] = combine(
 )
 
 func activityFeed(
-  _ reducer: @escaping (inout AppState, AppAction) -> Void
-) -> (inout AppState, AppAction) -> Void {
+  _ reducer: @escaping Reducer<AppState, AppAction>
+) -> Reducer<AppState, AppAction> {
     
     return { state, action in
         switch action {
-        case .counterView(.counter):
+        case .counterView(.counter),
+             .favoritePrimes(.loadFavoritePrimes(_)),
+             .favoritePrimes(.savedButtonTapped),
+             .favoritePrimes(.loadButtonTapped):
             break
         case .counterView(.primeModal(.removeFavoritePrimeTapped)):
             state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(state.count)))
@@ -136,14 +143,7 @@ func activityFeed(
             for index in indexSet {
                 state.activityFeed.append(.init(timestamp: Date(), type: .removedFavoritePrime(state.favoritePrimes[index])))
             }
-        case .favoritePrimes(.loadFavoritePrimes(_)):
-            break
-        case .favoritePrimes(.savedButtonTapped):
-            break
-        case .favoritePrimes(.loadButtonTapped):
-            break
         }
-        
-        reducer(&state, action)
+        return reducer(&state, action)
     }
 }
